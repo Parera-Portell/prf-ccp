@@ -1,5 +1,5 @@
 /*
- * mig3d.c
+ * ccp.c
  * 
  * Copyright 2021 Joan Antoni Parera Portell
  * 
