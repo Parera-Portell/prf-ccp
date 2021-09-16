@@ -11,6 +11,6 @@ Exampe parameter file:
     hw (half width of lateral sampling)
     outfile (output file with profile data)
     model (earth model, in format Z,Vp,Vs)
-    p (ray parameter variable name of SAC header)
+    p (name of ray parameter variable in SAC header)
     
 This program migrates RFs laterally along the first fresnel zone by default.
