@@ -1,5 +1,5 @@
 # rf-ccp
-Common Conversion Point Stacking for receiver functions analysis. Input data must be in SAC format. Requires the sacio library.
+Common Conversion Point Stacking for receiver functions analysis. Input data must be in SAC format. Requires the sacio and fftw3 libraries.
 
 Exampe parameter file:
 
