@@ -12,6 +12,6 @@ Exampe parameter file:
     outfile (output file with profile data)
     model (earth model, in format Z,Vp,Vs)
     p (name of ray parameter variable in SAC header)
-    v (exponential term for phase weighting. 0 for linear stacking, i.e. no phase weighting)
+    v (exponential term for phase weighting, from 0 to 1. 0 for linear stacking, i.e. no phase weighting)
     
 This program migrates RFs laterally along the first fresnel zone by default.
