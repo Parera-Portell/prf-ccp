@@ -382,7 +382,7 @@ int main(int argc, char **argv){
 	/* Escriptura a un fitxer */
 	out_file = fopen(outfile, "w");
 	fprintf(out_file, "%s,%s,%s\n", "x","z","a");
-	for(i=0; i<nlay; i++){
+	for(i=depmin/dz; i<nlay; i++){
 		for(w=0; w<ncols; w++){
 			a = w*dx;
 			b = i*dz+dz/2;
