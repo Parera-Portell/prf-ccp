@@ -106,7 +106,7 @@ int main(int argc, char **argv){
 	mvs, inilat, inilon, finlat, finlon, len, azim, stla, stlo, baz, hw, 
 	az0, az1, dist0, dist1, x, y, xi, yi, ds, dt, a, b, c, up, us, zf, nu, 
 	acctime, amp, latj, lonj, fzr, wl, xamp, dzf, stx, l, q;
-	char rf[300], outfile[300], model[300], pvar[20];
+	char rf[500], outfile[500], model[500], pvar[20];
 	char *prm = argv[1];
 	char *rflist = argv[2];
 	FILE *prm_file, *list_file, *mod_file, *out_file;
@@ -360,7 +360,7 @@ int main(int argc, char **argv){
 			}			
 		}
 		w+=1;
-		if(w%10==0){printf("%d...", w);}	
+		if(w%100==0){printf("%d...", w);}	
 	}
 	
 	printf("%d!\n", w);
@@ -382,13 +382,15 @@ int main(int argc, char **argv){
 	/* Escriptura a un fitxer */
 	out_file = fopen(outfile, "w");
 	fprintf(out_file, "%s,%s,%s\n", "x","z","a");
-	for(i=depmin/dz; i<nlay; i++){
+	for(i=0; i<nlay; i++){
 		for(w=0; w<ncols; w++){
 			a = w*dx;
-			b = i*dz+dz/2;
-			fprintf(out_file, "%f,%f,%f\n", a,b,perfil[w][i]);
+			b = i*dz;
+			if(b>=depmin){
+				fprintf(out_file, "%f,%f,%f\n", a,b,perfil[w][i]);
 			}
 		}
+	}
 	fclose(out_file);
 	
 	return 0;
