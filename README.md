@@ -1,5 +1,5 @@
 # rf-ccp
-Common Conversion Point Stacking for receiver functions analysis. Input data must be in SAC format. Requires the sacio and fftw3 libraries.
+Common Conversion Point Stacking for receiver function (RF) analysis. Input data must be in SAC format.
 
 Exampe parameter file:
 
@@ -14,4 +14,9 @@ Exampe parameter file:
     p (name of ray parameter variable in SAC header)
     v (exponential term for phase weighting. 0 for linear stacking, i.e. no phase weighting)
     
-This program migrates RFs laterally along the first fresnel zone by default.
+Required libraries
+
+    sacio
+    fftw3
+    
+This program migrates RFs along the first fresnel zone and outputs a text file containing X (distance), Z (depth), A (amplitude).
