@@ -23,4 +23,4 @@ This program migrates RFs along the first fresnel zone and outputs a text file c
 
     ccp [path to parameter file] [path to RF list]
     
-RFs in the list should be specified with the full path.
+RFs in the list should be specified with their full path.
