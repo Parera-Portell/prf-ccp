@@ -203,7 +203,7 @@ int main(int argc, char **argv){
 	fclose(mod_file);
 	/* Comença la transformació a un model de capes */
 	n=0;
-	for(w=0; w<nlay; w++){
+	for(w=0; w<=nlay; w++){
 		z=dz*w;
 		i=0; mvp=0; mvs=0;
 		
@@ -373,7 +373,7 @@ int main(int argc, char **argv){
 			absphase[w][i] = pow(fabs(pphase[w][i])/pnorm[w][i],nu);
 			/* Suavitzat */
 			if(w>0){
-				absphase[w][i] = 0.25*absphase[w][i]+(1-0.25)*absphase[w-1][i];
+				absphase[w][i] = 0.2*absphase[w][i]+(1-0.2)*absphase[w-1][i];
 			}
 			perfil[w][i] *= absphase[w][i];
 		}
@@ -385,8 +385,8 @@ int main(int argc, char **argv){
 	for(i=0; i<nlay; i++){
 		for(w=0; w<ncols; w++){
 			a = w*dx;
-			b = i*dz;
-			if(b>=depmin){
+			b = i*dz+dz/2;
+			if(i*dz>=depmin){
 				fprintf(out_file, "%f,%f,%f\n", a,b,perfil[w][i]);
 			}
 		}
