@@ -9,8 +9,8 @@ Exampe parameter file:
     dx,dz (lateral and vertical sampling of profile)
     zmin,zmax (initial and final depth of profile)
     hw (half width of lateral sampling)
-    outfile (output file with profile data)
-    model (earth model, in format Z,Vp,Vs)
+    outfile (output file path)
+    model (path to earth model text file, in format Z,Vp,Vs)
     p (name of ray parameter variable in SAC header)
     v (exponential term for phase weighting. 0 for linear stacking, i.e. no phase weighting)
     
