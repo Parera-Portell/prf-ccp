@@ -1,7 +1,7 @@
 # rf-ccp
 Common Conversion Point Stacking for receiver function (RF) analysis. Input data must be in SAC format.
 
-Exampe parameter file:
+Example parameter file:
 
     lat0,lon0 (initial latitude and longitude)
     lat1,lon1 (final latitude and longitude)
