@@ -12,6 +12,7 @@ Example parameter file:
     outfile (output file path)
     model (path to earth model text file, in format Z,Vp,Vs)
     p (name of ray parameter variable in SAC header)
+    zv (exponential term for depth-amplitude scaling. As amplitude decreases with depth, it is sometimes useful to apply a scale factor. The amplitude (A) is recalculated as A=A*(z**zv), where z is depth. Leave as 0 if you do not want depth scaling at all)
     v (exponential term for phase weighting. 0 for linear stacking, i.e. no phase weighting)
     
 Required libraries
