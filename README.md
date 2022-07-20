@@ -6,9 +6,9 @@ Example parameter file:
     lat0,lon0 (initial latitude and longitude)
     lat1,lon1 (final latitude and longitude)
     t0 (initial time of data)
-    dx,dz (lateral and vertical sampling of profile)
-    zmin,zmax (initial and final depth of profile)
-    hw (half width of lateral sampling)
+    dx,dz (lateral and vertical resolution of profile, or cell size, in km)
+    zmin,zmax (initial and final depth of profile, in km)
+    hw (half width of lateral sampling, in km)
     outfile (output file path)
     model (path to earth model text file, in format Z,Vp,Vs)
     p (name of ray parameter variable in SAC header)
@@ -24,4 +24,4 @@ This program migrates Ps waves along the first fresnel zone and outputs a text f
 
     ccp [path to parameter file] [path to RF list]
     
-RFs in the list should be specified with their full path.
+RFs in the list must include the full path. Note that manual memory allocation has not been implemented, so avoid setting an excessively small cell size as the program will crash. As long as you scale the cell size according to the profile length and depth you will be fine.
