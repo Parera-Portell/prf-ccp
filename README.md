@@ -20,7 +20,11 @@ Required libraries
     sacio
     fftw3
     
-This program migrates Ps waves along the first fresnel zone and outputs a text file containing X (distance), Z (depth), A (amplitude). To run the program:
+This program migrates Ps waves along the first fresnel zone and outputs two text files:
+1) X (distance in km), Z (depth in km), A (amplitude), LAT, LON, Z (depth in deg)
+2) X (distance in km), Z (depth in km), N (number of stacked RFs)
+
+To run the program:
 
     ccp [path to parameter file] [path to RF list]
     
