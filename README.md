@@ -8,7 +8,7 @@ Example parameter file:
     t0 (initial time of data)
     dx,dz (lateral and vertical resolution of profile, or cell size, in km)
     zmin,zmax (initial and final depth of profile, in km)
-    hw (half width of lateral sampling, in km)
+    hw (half width -lateral sampling-, in km)
     outfile (output file path)
     model (path to earth model text file, in format Z,Vp,Vs)
     p (name of ray parameter variable in SAC header)
