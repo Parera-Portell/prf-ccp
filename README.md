@@ -28,4 +28,4 @@ To run the program:
 
     ccp [path to parameter file] [path to RF list]
     
-RFs in the list must include the full path. Note that manual memory allocation has not been implemented, so avoid setting an excessively small cell size as the program will crash. As long as you scale the cell size according to the profile length and depth you will be fine.
+RFs in the list must include the full path.
