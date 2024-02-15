@@ -12,32 +12,6 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
- * 
- * Variables de la funció main:
- * t0: temps inicial; tf: temps final; w-wsum: variables per controlar
- * el nombre de paràmetres que es llegeixen del fitxer de paràmetres;
- * i-j-k-n: variables comptador; nlen: mida de la matriu RF; nerr: variable
- * per control d'errors; nlay-ncols: nombre de files i columnes del
- * perfil; delta: freqüència de les dades en segons; dx-dz: increment de
- * distància lateral i vertical del perfil; depmin-depmax: profunditat
- * mínima i màxima del perfil; dep: variable de control de la profunditat; 
- * beg: temps entre inici de les dades i arribada d'ona P; p: paràmetre 
- * de raig sísmic; z: variable de control de la profunditat del perfil;
- * inilat-inilon-finlat-finlon:
- * latitud i longitud d'inici i final del perfil; len: longitud de perfil;
- * azim: azimut de perfil; stla-stla: coordenades de l'estació; baz:
- * backazimuth; hw: mostreig lateral del perfil en km; az0-az1: azimuts
- * per càlculs geogràfics; dist0-dist1: distància per càlculs geogràfics;
- * x-y-xi-yi: punts projectats respecte el perfil en km; lati-loni:
- * coordenades per càlculs geogràfics; ds: distància epicentral entre dos
- * punts al llarg del raig sísmic; dt: temps de viatge entre dos punts al
- * llarg del raig sísmic; a-b-c-l-q: variables auxiliars per càlculs;
- * up-us: velocitats P i S transformades a un model de capes planes;
- * zf: profunditat transformada a un model de capes planes; psph: paràmetre
- * de raig sísmic en s/rad; acctime: temps de viatge acumulat; amp:
- * amplitud de l'RF; fzr: radi de la zona de fresnel; wl: longitud d'ona;
- * iangle: angle d'incidència; xamp: amplitud corregida.
  */
 
 
@@ -101,12 +75,12 @@ void proj(float dist, float az0, float az1, float *x, float *y){
 /* Funció principal */
 void main(int argc, char **argv){
 	
-	int t0, w, n, wsum, nlen, nerr, nlay, ncols, max=MAX, i, j, k, fz;
+	int t0, w, n, wsum, nlen, nerr, nlay, ncols, max=MAX, i, j, k;
 	float delta, dx, dz, dep, depmin, depmax, beg, p, array[MAX], z,
 	inilat, inilon, finlat, finlon, len, azim, stla, stlo, baz, hw,
 	az0, az1, dist0, dist1, x, y, xi, yi, ds, dt, a, b, c, up, us, zf, nu, 
 	acctime, amp, latj, lonj, fzr, wl, xamp, dzf, stx, l, q, zv, modn,
-	x0, x1, y0, y1;
+	x0, x1, y0, y1, fz, gauss;
 	char rf[500], outfile[500], outres[500], model[500], pvar[20];
 	char *prm = argv[1];
 	char *rflist = argv[2];
@@ -153,10 +127,11 @@ void main(int argc, char **argv){
 	w=fscanf(prm_file, "%s", pvar); wsum += w;
 	w=fscanf(prm_file, "%f", &zv); wsum += w;
 	w=fscanf(prm_file, "%f", &nu); wsum += w;
+	w=fscanf(prm_file, "%f", &gauss); wsum += w;
 	fclose(prm_file);
 	
 	/* Comprovar si tots els paràmetres s'han llegit correctament */
-	if(wsum != 16){
+	if(wsum != 17){
 		printf("Error reading parameter file. Exiting...\n");
 		exit(1);}
 	
@@ -172,6 +147,7 @@ void main(int argc, char **argv){
 	printf("Ray param. variable: \t%s\n", pvar);
 	printf("Depth scaling exp. term:%.2f\n", zv);
 	printf("Phase weight exp. term: %.2f\n", nu);
+	printf("Gaussian width param.: %.2f\n", gauss);
 	
 	/* Comprovar si la llista de RFs existeix */
 	list_file = fopen(rflist, "r");
@@ -334,8 +310,6 @@ void main(int argc, char **argv){
 				dt = sqrtf(a)*dzf-sqrtf(b)*dzf;
 				/*  PpPs */
 				/*sqrtf(a)*dzf+sqrtf(b)*dzf;*/
-				/* PpSs */
-				/*sqrtf(a)*dzf-sqrtf(a)*dzf;*/
 				/* Càlcul de l'amplitud dins l'interval de temps */
 				acctime += dt;
 				k = round(acctime/delta);
@@ -346,7 +320,7 @@ void main(int argc, char **argv){
 				proj(ds,baz,azim,&xi,&yi);
 				x += xi;
 				y += yi;
-				fz = 1;
+				fz = 1/gauss;
 				wl = fz*(1/us);
 				fzr = sqrtf(0.5*wl*(dz*j)+0.0625*wl*wl);
 				/* Factor de saturació amplitud-profunditat */
@@ -357,7 +331,7 @@ void main(int argc, char **argv){
 				if(fabs(y)<=hw){
 					for(n=0;n<ncols;n++){
 						l = n*dx-x;
-						a = 0.5*fz*fzr;
+						a = 0.5*1*fzr;
 						b = -0.5*(l*l)/(a*a);
 						if(b < -20){c=0;}
 						else{c = exp(b)/a*sqrtf(2*3.14159);}
