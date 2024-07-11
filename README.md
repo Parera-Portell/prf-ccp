@@ -15,6 +15,7 @@ Example parameter file:
     zv (exponential term for depth-amplitude scaling. As amplitude decreases with depth, it is sometimes useful to apply a scale factor. The amplitude (A) is recalculated as A=A*(z**zv), where z is depth. Leave as 0 if you do not want depth scaling at all)
     v (exponential term for phase weighting. 0 for linear stacking, i.e. no phase weighting)
     a (frequency of the RF)
+    0 (stacking of first Fresnel zone) or 1 (stacking of ray paths)
     
 Required libraries
 
